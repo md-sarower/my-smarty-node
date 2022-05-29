@@ -18,15 +18,23 @@ const users = [
 
 app.get('/user', (req, res) => {
     res.send(users);
-})
+});
 
 app.get('/user/:id', (req, res) => {
     console.log(req.params);
-    const id = req.params.id;
-    const user = users.find(u => u.id == id);
+    const id = parseInt(req.params.id);
+    const user = users.find(u => u.id === id);
     res.send(user)
+});
+
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('Fazle is my favorite mango');
 })
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'apple', 'orangs']);
+});
 
 app.listen(port, () => {
     console.log('Listening to port: ', port);
-})
+});
