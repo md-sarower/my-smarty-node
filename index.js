@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello! form my favorite smarty node js form node js!')
@@ -32,6 +33,11 @@ app.get('/user/:id', (req, res) => {
 
 app.get('/fruits/mango/fazle', (req, res) => {
     res.send('Fazle is my favorite mango');
+})
+
+app.post('/user', (req, res) => {
+    console.log('request', req.body);
+    res.send('post method success')
 })
 
 app.get('/fruits', (req, res) => {
