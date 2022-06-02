@@ -21,7 +21,15 @@ const users = [
 ]
 
 app.get('/user', (req, res) => {
-    res.send(users);
+    // filter by search query parameter
+    if (req.query.name) {
+        const search = req.query.name.toLowerCase();
+        const matched = users.filter(user => user.name.toLowerCase().includes(search))
+        res.send(matched);
+    }
+    else {
+        res.send(users);
+    }
 });
 
 app.get('/user/:id', (req, res) => {
@@ -37,7 +45,10 @@ app.get('/fruits/mango/fazle', (req, res) => {
 
 app.post('/user', (req, res) => {
     console.log('request', req.body);
-    res.send('post method success')
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    res.send(user);
 })
 
 app.get('/fruits', (req, res) => {
